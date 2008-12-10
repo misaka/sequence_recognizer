@@ -47,6 +47,10 @@ module SequenceRecognizer
       # sequences per series.
       shortcodes_by_mask.each do |mask,series|
 
+        # Short-circuit out if there's no chance we'll get a sequence longer
+        # than 1.
+        next if series.length < 2
+
         # increment is the number we'll add to the shortcode to see if it is
         # sequential.
         increment = 10 ** ( shortcode_length - mask.index( '*' ) - 1 )
